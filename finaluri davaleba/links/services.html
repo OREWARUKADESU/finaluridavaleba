@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <title>EcoSolutions</title>
+  </head>
+  <body>
+    <header>
+      <div class="container header-content">
+        <h1><a href="../index.html"><img src="../images/logo.png" alt="EcoSolutions Logo" /></a></h1>
+        <nav>
+          <ul class="home">
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+            <li><a href="news.html">NEWS</a></li>
+            <li><a href="services.html" class="active">OUR SERVICES</a></li>
+            <li><a href="contacts.html">CONTACT US</a></li>
+          </ul>
+        </nav>
+        <div class="signup">
+          <a href="#" id="signup-btn">SIGN UP</a>
+          <div class="signup-modal" id="signupModal">
+              <div class="modal-content">
+                  <span class="close-btn" id="closeBtn">&times;</span>
+                  <h2>Sign Up</h2>
+                  <form class="signup-form">
+                      <input type="text" id="email" placeholder="Email">
+                      <p class="error-message">Please enter a valid email address</p> <!-- Error message for email -->
+                      <input type="password" id="password" placeholder="Password">
+                      <p class="error-message">Password must be at least 8 characters long.</p> <!-- Error message for password -->
+                      <input type="password" id="confirm-password" placeholder="Confirm Password">
+                      <p class="error-message">Passwords do not match.</p> <!-- Error message for confirm password -->
+                      <button type="submit">Sign Up</button>
+                  </form>
+              </div>
+          </div>
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const signupBtn = document.getElementById('signup-btn');
+                const signupModal = document.getElementById('signupModal');
+                const closeBtn = document.getElementById('closeBtn');
+                const emailInput = document.getElementById('email');
+                const passwordInput = document.getElementById('password');
+                const confirmPasswordInput = document.getElementById('confirm-password');
+                const errorMessages = document.querySelectorAll('.error-message');
+                const signUpForm = document.querySelector('.signup-form');
+            
+                signupBtn.addEventListener('click', function () {
+                    signupModal.style.display = 'flex';
+                });
+            
+                closeBtn.addEventListener('click', function () {
+                    signupModal.style.display = 'none';
+                    resetForm();
+                });
+            
+                signUpForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    clearErrorMessages();
+            
+                    const email = emailInput.value;
+                    const password = passwordInput.value;
+                    const confirmPassword = confirmPasswordInput.value;
+            
+                    if (!validateEmail(email)) {
+                        displayErrorMessage(errorMessages[0], 'Please enter a valid email address.');
+                        return;
+                    }
+            
+                    if (password.length < 8) {
+                        displayErrorMessage(errorMessages[1], 'Password must be at least 8 characters long.');
+                        return;
+                    }
+            
+                    if (password !== confirmPassword) {
+                        displayErrorMessage(errorMessages[2], 'Passwords do not match.');
+                        return;
+                    }
+            
+                    resetForm();
+                    signupModal.style.display = 'none';
+                });
+            
+                emailInput.addEventListener('input', function () {
+                    clearErrorMessages();
+                });
+            
+                passwordInput.addEventListener('input', function () {
+                    clearErrorMessages();
+                });
+            
+                confirmPasswordInput.addEventListener('input', function () {
+                    clearErrorMessages();
+                });
+            
+                function validateEmail(email) {
+                    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return regex.test(email);
+                }
+            
+                function displayErrorMessage(errorMessageElement, message) {
+                    errorMessageElement.textContent = message;
+                    errorMessageElement.style.color = 'red'; // Set color to red
+                }
+            
+                function clearErrorMessages() {
+                    errorMessages.forEach(errorMessage => {
+                        errorMessage.textContent = '';
+                        errorMessage.style.color = ''; // Reset color
+                    });
+                }
+            
+                function resetForm() {
+                    signUpForm.reset();
+                    clearErrorMessages();
+                }
+            });
+            </script>                             
+        </div>
+        <div class="topnav">
+          <div class="fa-burger">
+            <label class="hamburger">
+              <input type="checkbox">
+              <svg viewBox="0 0 32 32" onclick="onClick()">
+                <path class="line line-top-bottom"
+                  d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                </path>
+                <path class="line" d="M7 16 27 16"></path>
+              </svg>
+            </label>
+            <script>
+              const onClick = () => {
+                const element = document.getElementById("menu");
+                if (element.style.display === "none") {
+                  element.style.display = "inline";
+                } else {
+                  element.style.display = "none";
+                }
+              }
+            </script>
+              <div id="menu">
+                <a href="../index.html">HOME</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="news.html">NEWS</a>
+                <a href="services.html">OUR SERVICES</a>
+                <a href="contacts.html">CONTACT US</a>
+              </div>
+            </div>
+        </div>
+      </div>
+    </header>
+    <section id="sec2">
+      <div id="greener">
+        <h2>You can contribute to make the environment greener!</h2>
+          <h5 class="registration-trigger">
+            <img src="../images/icon2.png" class="icon" alt="Icon">
+            Join as a volunteer
+          </h5>
+          <div class="modal" id="registrationModal">
+            <div class="modal-content">
+              <span class="modal-close" id="modalClose">&times;</span>
+              <h3>Register</h3>
+              <form>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+          
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+          
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+          
+                <button class="register-button">Register</button>
+              </form>
+            </div>
+          </div>
+                    
+          <script>
+          document.addEventListener("DOMContentLoaded", function() {
+  const registrationTrigger = document.querySelector(".registration-trigger");
+  const modal = document.getElementById("registrationModal");
+  const modalContent = modal.querySelector(".modal-content");
+  const modalClose = document.getElementById("modalClose");
+
+  registrationTrigger.addEventListener("click", function() {
+    modal.style.display = "flex";
+    setTimeout(function() {
+      modalContent.style.transform = "scale(1)";
+      modalContent.style.opacity = 1;
+    }, 10);
+  });
+
+  modalClose.addEventListener("click", function() {
+    modalContent.style.transform = "scale(0.8)";
+    modalContent.style.opacity = 0;
+    setTimeout(function() {
+      modal.style.display = "none";
+    }, 300);
+  });
+
+  modal.addEventListener("click", function(event) {
+    if (event.target === modal) {
+      modalContent.style.transform = "scale(0.8)";
+      modalContent.style.opacity = 0;
+      setTimeout(function() {
+        modal.style.display = "none";
+      }, 300);
+    }
+  });
+});
+
+          </script>
+      </div>
+      <div id="titl1">
+        <h4>Read Our News</h4>
+        <div id="line2"></div>
+      </div>
+      <div id="mother2">
+        <div class="card">
+            <img src="../images/card1.jpg" alt="card1">
+            <h5>Preserve Our Natural Habitats</h5>
+            <p>Learn how our efforts to conserve ecosystems are making a positive impact on the environment.</p>
+        </div>
+        <div class="card">
+            <img src="../images/card2.jpg" alt="card2">
+            <h5>Exploring Renewable Energy Sources</h5>
+            <p>Discover the exciting potential of various renewable energy sources and their role in reducing emissions.</p>
+        </div>
+        <div class="card">
+            <img src="../images/card3.jpg" alt="card3">
+            <h5>The Future of Sustainable Transportation</h5>
+            <p>Explore innovations in eco-friendly transportation options that are reshaping the way we travel.</p>
+        </div>
+        <div class="card">
+          <img src="../images/card4.jpg" alt="card4">
+          <h5>Empowering Clean Water Access</h5>
+          <p>Learn how our community brings clean water to underserved communities globally.</p>
+      </div>      
+    </div>
+    
+      <div id="titl2">
+        <h4>Our Events</h4>
+        <div id="line2"></div>
+      </div>
+
+      <div id="cards">
+        <div id="card1">
+            <div id="date">
+                <h4>23</h4>
+                <h6>SEP</h6>
+            </div>
+    
+            <div id="events">
+                <h6>NEXT EVENTS ⸻</h6>
+                <h4>Say no to plastic usage and save the planet</h4>
+            </div>
+            <img src="../images/icon3.jpg" alt="arrowicon">
+        </div>
+        <div id="card2">
+            <div id="date">
+                <h4>25</h4>
+                <h6>SEP</h6>
+            </div>
+    
+            <div id="events">
+                <h6>NEXT EVENTS ⸻</h6>
+                <h4>Weekly cleaning program</h4>
+            </div>
+            <img src="../images/icon3.jpg" alt="arrowicon">
+        </div>
+    </div>
+    
+    </section>    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  let mybutton = document.getElementById("Btn");
+  window.addEventListener("scroll", function() {
+    scrollFunction();
+    appearFromBottom();
+  });
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.opacity = "1";
+      mybutton.style.bottom = "20px"; // Show the button immediately at the bottom
+    } else {
+      mybutton.style.opacity = "0";
+      mybutton.style.bottom = "-60px"; // Hide the button immediately at the bottom
+    }
+  }
+
+  function appearFromBottom() {
+    if (window.pageYOffset > 20) {
+      mybutton.style.bottom = "20px";
+    } else {
+      mybutton.style.bottom = "-60px";
+    }
+  }
+
+  function topFunction() {
+    if (document.documentElement.scrollTop > 0) {
+      window.requestAnimationFrame(topFunction);
+      document.documentElement.scrollTop -= 20;
+    }
+  }
+
+  mybutton.addEventListener("click", topFunction);
+});
+    </script>
+    <footer>
+      <img src="../images/logo.png" alt="TBC Bank logo">
+      <div class="column">
+        <ul>
+          <li id="bold">Our team</li>
+          <li><a href="links/about.html" id="other">About us</a></li>
+          <li><a href="#" id="other">Team</a></li>
+          <li><a href="links/services.html" id="other">What we do</a></li>
+          <li><a href="links/contacts.html" id="other">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <ul>
+          <li id="bold">More</li>
+          <li><a href="#" id="other">Projects</a></li>
+          <li><a href="#" id="other">Events</a></li>
+          <li><a href="#" id="other">Donate</a></li>
+          <li><a href="#" id="other">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <ul>
+          <li id="bold">Connect</li>
+          <li><a href="https://www.facebook.com/tbcbank/?locale=ka_GE" id="other">Facebook</a></li>
+          <li><a href="https://www.instagram.com/tbc_concept/" id="other">Instagram</a></li>
+          <li><a href="https://twitter.com/jsctbc?lang=en" id="other">Twitter</a></li>
+          <li><a href="https://ge.linkedin.com/company/tbc-bank" id="other">Linkdin</a></li>
+        </ul>
+      </div>
+
+      <div id="sub">
+        <h1>Subscribe to get latest updates</h1>
+        <form class="subscription-form" novalidate>
+            <input type="email" class="email-input" placeholder="Enter your email">
+            <button type="submit">Subscribe</button>
+            <p class="error-message"></p>
+            <p class="success-message"></p>
+        </form>
+    </div>
+
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          const subscriptionForm = document.querySelector('.subscription-form');
+          const emailInput = document.querySelector('.email-input');
+          const subscribeButton = document.querySelector('.subscription-form button');
+          const errorMessage = document.querySelector('.error-message');
+          const successMessage = document.querySelector('.success-message');
+          
+          subscriptionForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const email = emailInput.value;
+
+          if (validateEmail(email)) {
+          showSuccessMessage();
+          emailInput.value = '';
+          errorMessage.textContent = ''; // Clear error message
+          } 
+          else {
+        showErrorMessage('Please enter a valid email address.'); // Corrected function name
+        }
+        });
+          subscribeButton.addEventListener('mouseover', function () {
+              this.style.backgroundColor = 'var(--green-primary-hover, #57AB67)';
+              this.style.color = '#FFF';
+          });
+      
+          subscribeButton.addEventListener('mouseout', function () {
+              this.style.backgroundColor = '#FFF';
+              this.style.color = 'var(--green-primary, #70C174)';
+          });
+      
+          function validateEmail(email) {
+              const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              return regex.test(email);
+          }
+      
+          function showSuccessMessage() {
+              errorMessage.textContent = ''; // Clear any previous error message
+              successMessage.textContent = 'Thank you for subscribing!';
+          }
+      
+          function showErrorMessage(message) {
+              successMessage.textContent = ''; // Clear any previous success message
+              errorMessage.textContent = message;
+          }
+      });
+      </script>
+    </footer>
+  </body>
+</html>
